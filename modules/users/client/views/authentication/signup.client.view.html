@@ -3,35 +3,9 @@
     <div class="row">
       <h3 class="col-md-12 text-center">Or sign up using your email</h3>
 
-      <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+      <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
         <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
           <fieldset>
-            <div class="form-group" show-errors>
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
-
-              <div ng-messages="userForm.firstName.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">First name is required.</p>
-              </div>
-            </div>
-            <div class="form-group" show-errors>
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
-
-              <div ng-messages="userForm.lastName.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Last name is required.</p>
-              </div>
-            </div>
-            <div class="form-group" show-errors>
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase required>
-
-              <div ng-messages="userForm.email.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">Email address is required.</p>
-
-                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-              </div>
-            </div>
             <div class="form-group" show-errors>
               <label for="username">Username</label>
               <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Username" lowercase required>
@@ -54,8 +28,42 @@
             </div>
             <div class="form-group" ng-show="!userForm.password.$error.required">
               <label>Password Requirements</label>
-              <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
+              <progressbar value="requirementsProgress" type="{{requirementsColor}}" style="border:1px solid #dfdfdf;width:135px;display:block;"><span style="color:transparent; white-space:nowrap;width:{{requirementsProgress}}%;display:inline-block;background-color:#33FF58;max-width:100%;transition: all 2s ease-in-out;">{{requirementsProgress}}%</span></progressbar>
             </div>
+            <div class="form-group" show-errors>
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" ng-model="credentials.confirmPassword" placeholder="Confirm Password" password-verify="credentials.password" required>
+              <div ng-messages="userForm.confirmPassword.$error" role="alert">
+                <p class="help-block error-text" ng-show=userForm.confirmPassword.$error.passwordVerify>Confirm Passwords do not match.</p>
+              </div>
+            </div>
+            <div class="form-group" show-errors style="width: 49%; display: inline-block;">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" class="form-control" ng-model="credentials.firstName" placeholder="First Name" required>
+
+              <div ng-messages="userForm.firstName.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">First name is required.</p>
+              </div>
+            </div>
+            <div class="form-group" show-errors style="width: 50.2%; display: inline-block;">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" required>
+
+              <div ng-messages="userForm.lastName.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Last name is required.</p>
+              </div>
+            </div>
+            <div class="form-group" show-errors>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email" placeholder="Email" lowercase required>
+
+              <div ng-messages="userForm.email.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Email address is required.</p>
+
+                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+              </div>
+            </div>
+            
             <div class="text-center form-group">
               <button type="submit" class="btn btn-primary">Sign up</button>
               &nbsp; or&nbsp;

@@ -17,8 +17,12 @@
         <a ui-sref="authentication.signin">Sign In</a>
       </li>
     </ul>
+    <div ng-show="authentication.user" class="pull-right" style="display: inline; margin-top:6px; right: 180px;position: absolute;">
+      <img class="img-responsive pull-right" src="modules/core/client/img/cart/shopping.png" >
+    </div>
     <ul class="nav navbar-top-links navbar-nav navbar-right" ng-show="authentication.user">
       <li uib-dropdown="">
+
         <a uib-dropdown-toggle="" class="user-header-dropdown-toggle" role="button">
           <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
