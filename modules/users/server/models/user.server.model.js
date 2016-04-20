@@ -99,13 +99,16 @@ var UserSchema = new Schema({
     type: Date
   },
   status: {
-    type: String
+    type: String,
+    default: 'Active'
   },
   shippingAddress: {
-    type: String
+    type: String,
+    default: ''
   },
   billingAddress: {
-    type: String
+    type: String,
+    default: ''
   }
 });
 
