@@ -101,7 +101,8 @@ var UserSchema = new Schema({
     trim: true
   },
   status:{
-    type: Boolean
+    type: Boolean,
+    default: true
   },
   /* For reset password */
   resetPasswordToken: {
@@ -109,18 +110,6 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  },
-  status: {
-    type: String,
-    default: 'Active'
-  },
-  shippingAddress: {
-    type: String,
-    default: ''
-  },
-  billingAddress: {
-    type: String,
-    default: ''
   }
 });
 
