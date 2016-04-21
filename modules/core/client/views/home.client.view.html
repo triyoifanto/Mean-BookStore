@@ -10,9 +10,29 @@
           </h1>
           <small>
             {{descriptionText}}
-            <br/>
-            MEAN.JS is open-source full-stack solution for MEAN (Mongo, Express, Angular, Node) applications: <br/><br/><a class="btn btn-primary btn-xs" href="http://meanjs.org" target="_blank">Learn more</a>
+            <!--<br/>
+            MEAN.JS is open-source full-stack solution for MEAN (Mongo, Express, Angular, Node) applications: <br/><br/><a class="btn btn-primary btn-xs" href="http://meanjs.org" target="_blank">Learn more</a>-->
           </small>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="product in products">
+            <div class="ibox">
+              <div class="ibox-content product-box">
+                <div class="product-imitation">
+                  <img ng-src="{{product.image}}" class="img-responsive" width="110px" style="margin: 0 auto;">
+                </div>
+                <div class="product-desc">
+                  <span class="product-price">{{product.Price | currency}}</span>
+                  <a class="product-name">{{product.title}}</a>
+                  <div class="small m-t-xs">{{product.author}}</div>
+                  <div class="m-t text-righ">
+                      <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

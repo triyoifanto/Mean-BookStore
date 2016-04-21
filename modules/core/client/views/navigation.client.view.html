@@ -4,18 +4,19 @@
       <li class="nav-header">
         <div class="profile-element">
           <!-- Picture of user -->
-          <!--<img alt="image" class="img-circle" src="img/profile_small.jpg"/>-->
-          <a href>
+          <img alt="image" class="img-responsive" src="modules/core/client/img/brand/logo.png">
+          <!--<a href>
             <span class="clear">
                 <span class="block m-t-xs">
                     <strong class="font-bold">User</strong>
              </span>
                 <span class="text-muted text-xs block">Example</span>
             </span>
-          </a>
+          </a>-->
         </div>
         <div class="logo-element">
-          IN+
+          <img alt="image" class="img-responsive" src="modules/core/client/img/brand/favicon.ico" ng-hide="authentication.user">
+          <img alt="{{user.displayName}}" class="img-responsive" ng-src="{{authentication.user.profileImageURL}}" ng-show="authentication.user">
         </div>
       </li>
       <li ng-class="{active: $uiRoute}" ui-route="/" >

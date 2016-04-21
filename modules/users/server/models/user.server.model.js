@@ -109,6 +109,18 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  status: {
+    type: String,
+    default: 'Active'
+  },
+  shippingAddress: {
+    type: String,
+    default: ''
+  },
+  billingAddress: {
+    type: String,
+    default: ''
   }
 });
 

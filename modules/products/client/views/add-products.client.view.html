@@ -1,0 +1,84 @@
+<div class="ibox" ng-controller="ProductController">
+  <div class="ibox-content">
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
+        <form name="productForm" ng-submit="add(productForm.$valid)" class="signin" novalidate autocomplete="off">
+          <fieldset>
+            <div class="form-group" show-errors>
+              <label for="title">Title</label>
+              <input type="text" id="title" name="title" class="form-control" ng-model="product.title" placeholder="Book Title" required>
+              <div ng-messages="productForm.title.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Title is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="author">Author</label>
+              <input type="text" id="author" name="author" class="form-control" ng-model="product.author" placeholder="Author" required>
+              <div ng-messages="productForm.author.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Author is required.</p>
+              </div>
+            </div>
+            
+            <div class="form-group" show-errors>
+              <label for="description">Description</label>
+              <textarea rows="3" cols="5" id="description" name="description" class="form-control" ng-model="product.description" placeholder="Book Description" required></textarea>
+
+              <div ng-messages="productForm.description.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Description is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="category">Category</label>
+              <select name="category" class="form-control" ng-model="product.category" required><option value="General">General</option></select>
+              <div ng-messages="productForm.category.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Category is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="image">Book Cover</label>
+              <input type="file" id="image" name="image" class="form-control" ng-model="product.image" placeholder="Book Cover" required>
+              <div ng-messages="productForm.image.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Book Cover is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="price">Price</label>
+              <input type="text" id="price" name="price" class="form-control" ng-model="product.price" placeholder="Price"required>
+              <div ng-messages="productForm.price.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Price is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="stock">Stock</label>
+              <input type="text" id="stock" name="stock" class="form-control" ng-model="product.stock" placeholder="Stock" lowercase required>
+              <div ng-messages="productForm.stock.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Stock is required.</p>
+              </div>
+            </div>
+
+            <div class="form-group" show-errors>
+              <label for="status">Status</label>
+              <select name="category" class="form-control" ng-model="product.status" required><option value="instock">In Stock</option><option value="outofstock">Out of Stock</option></select>
+              <div ng-messages="productForm.status.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Status is required.</p>
+              </div>
+            </div>
+            
+            <div class="text-center form-group">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+            
+            <div ng-show="error" class="text-center text-danger">
+              <strong ng-bind="error"></strong>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
