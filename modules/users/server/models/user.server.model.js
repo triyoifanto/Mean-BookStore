@@ -91,6 +91,18 @@ var UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  /* --ifan-- additional field for MEAN Book store*/
+  shippingAddr: {
+    type: String,
+    trim: true
+  },
+  billingAddr: {
+    type: String,
+    trim: true
+  },
+  status:{
+    type: Boolean
+  },
   /* For reset password */
   resetPasswordToken: {
     type: String

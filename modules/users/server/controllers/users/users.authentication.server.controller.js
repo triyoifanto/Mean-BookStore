@@ -119,6 +119,7 @@ exports.oauthCallback = function (strategy) {
           return res.redirect('/authentication/signin');
         }
 
+        // -ifan-- update the redirect url when using OAuth
         //return res.redirect(redirectURL || sessionRedirectURL || '/');
         return res.redirect('http://localhost:3000');
       });

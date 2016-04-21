@@ -45,6 +45,7 @@ module.exports = {
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
+    // --ifan-- update google api clientid & secret
     clientID: process.env.GOOGLE_ID || '1057214373846-j9hap9nm18i1226108l9mab4fl37qp75.apps.googleusercontent.com',//'APP_ID',
     clientSecret: process.env.GOOGLE_SECRET || 'KxShIYzlMczMkQT6AbqYifh_',//'APP_SECRET',
     callbackURL: '/api/auth/google/callback'

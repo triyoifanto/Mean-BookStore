@@ -20,7 +20,7 @@ module.exports = function (config) {
     var providerData = profile._json;
     providerData.accessToken = accessToken;
     providerData.refreshToken = refreshToken;
-
+    
     // Create the user OAuth profile
     var providerUserProfile = {
       firstName: profile.name.givenName,
@@ -28,7 +28,9 @@ module.exports = function (config) {
       displayName: profile.displayName,
       email: profile.emails[0].value,
       username: profile.username,
-      profileImageURL: (providerData.picture) ? providerData.picture : undefined,
+      // --ifan-- update code to get google image property
+      //profileImageURL: (providerData.picture) ? providerData.picture : undefined,
+      profileImageURL: (providerData.image.url) ? providerData.image.url : undefined,
       provider: 'google',
       providerIdentifierField: 'id',
       providerData: providerData

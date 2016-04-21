@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-  function ($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication', 'Controlls',
+  function ($scope, $http, $location, Users, Authentication, Controlls) {
     $scope.user = Authentication.user;
 
     // Update a user profile
@@ -24,6 +24,10 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       }, function (response) {
         $scope.error = response.data.message;
       });
+    };
+
+    $scope.renderControll = function (user){
+      return Controlls.isRenderCtrl(user);
     };
   }
 ]);
