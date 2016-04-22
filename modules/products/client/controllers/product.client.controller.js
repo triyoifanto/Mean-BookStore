@@ -1,51 +1,52 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('products.admin').controller('ProductController', ['$scope', '$state', 'Authentication', 'Products',
-  function ($scope, $state, Authentication, productResolve) {
-    $scope.authentication = Authentication;
-    $scope.product = productResolve;
+  angular
+    .module('products.admin')
+    .controller('ProductsController', ProductsController);
 
-    $scope.create = function(isValid){
-      if(!isValid){
-        $scope.$broadcase('show-errors-check-validity', 'productForm');
+  ProductsController.$inject = ['$scope', '$state', 'Products', '$window', 'Authentication'];
 
-        return false;
+  function ProductsController($scope, $state, Products, $window, Authentication) {
+    var vm = this;
+
+    vm.product = Products;
+    vm.authentication = Authentication;
+    vm.error = null;
+    vm.form = {};
+    vm.remove = remove;
+    vm.save = save;
+
+    // Remove existing Product
+    function remove() {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.product.$remove($state.go('products.list'));
       }
+    }
 
-      // TODO: state go to product form
-      
-    };
-
-    $scope.remove = function (product) {
-      if (confirm('Are you sure you want to delete this product?')) {
-        if (product) {
-          product.$remove();
-
-          $scope.products.splice($scope.products.indexOf(product), 1);
-        } else {
-          $scope.product.$remove(function () {
-            $state.go('admin.products');
-          });
-        }
-      }
-    };
-
-    $scope.update = function (isValid) {
+    // Save Product
+    function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'productForm');
-
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.productForm');
         return false;
       }
 
-      var product = $scope.product;
+      // TODO: move create/update logic to service
+      if (vm.product._id) {
+        vm.product.$update(successCallback, errorCallback);
+      } else {
+        vm.product.$save(successCallback, errorCallback);
+      }
 
-      product.$update(function () {
-        $state.go('admin.product', {
-          productId: product._id
+      function successCallback(res) {
+        $state.go('products.view', {
+          productId: res._id
         });
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
   }
-]);
+}());
