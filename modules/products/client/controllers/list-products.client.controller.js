@@ -5,7 +5,6 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
     ProductsService.query(function (data) {
       $scope.products = data;
       $scope.buildPager();
-      $scope.setPage();
     });
 
     $scope.buildPager = function () {

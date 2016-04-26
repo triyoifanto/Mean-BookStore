@@ -24,27 +24,11 @@ exports.create = function (req, res) {
   product.Stock = req.body.Stock;
   product.Status = req.body.Status;
 
-  /*var upload = multer(config.uploads.bookCoverUpload).single('newBookCover');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  
-  // Filtering to upload only images
-  upload.fileFilter = profileUploadFileFilter;*/
-
   if(!product){
     return res.status(400).send({
       message: 'please insert the product data '
     });
   }
-
-  /*upload(req, res, function (uploadError) {
-    if(uploadError) {
-      return res.status(400).send({
-        message: 'Error occurred while uploading book cover'
-      });
-    } else {
-      product.Image = config.uploads.bookCoverUpload.dest + req.file.filename;
-    }
-  });*/
 
   product.save(function (err) {
     if (err) {
@@ -52,7 +36,32 @@ exports.create = function (req, res) {
         message: 'test ' + errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(product);
+      var updateBookCover = product;
+      var upload = multer(config.uploads.bookCoverUpload).single('newBookCover');
+      var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+
+      // Filtering to upload only images
+      upload.fileFilter = profileUploadFileFilter;
+
+      upload(req, res, function (uploadError) {
+        if(uploadError) {
+          return res.status(400).send({
+            message: 'Error occurred while uploading profile picture'
+          });
+        } else {
+          updateBookCover.Image = config.uploads.bookCoverUpload.dest + req.file.filename;
+
+          updateBookCover.save(function (saveError) {
+            if (saveError) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(saveError)
+              });
+            } else {
+              res.json(updateBookCover);
+            }
+          });
+        }      
+      });
     }
   });
 };

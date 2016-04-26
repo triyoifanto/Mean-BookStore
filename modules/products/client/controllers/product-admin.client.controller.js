@@ -14,7 +14,7 @@ angular
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({
-      url: 'api/products/products-bookcover',
+      url: 'api/products/',
       alias: 'newBookCover'
     });
 
