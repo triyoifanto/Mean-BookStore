@@ -14,43 +14,45 @@
         templateUrl: 'modules/products/client/views/admin/list-products.client.view.html',
         controller: 'ProductsListController'
       })
-      .state('admin.products.create', {
-        url: '/product-create',
-        templateUrl: 'modules/products/client/views/form-products.client.view.html',
+      .state('admin.products-view', {
+        url: '/:productId',
+        templateUrl: 'modules/products/client/views/admin/view-product.admin.client.view.html',
         controller: 'ProductsController',
-        controllerAs: 'vm',
         resolve: {
-          productResolve: newProduct
+          productResolve: getProduct
         },
         data: {
           roles: ['user', 'admin'],
           pageTitle: 'Products Create'
         }
       })
+      .state('admin.products-create', {
+        url: '/products-create',
+        templateUrl: 'modules/products/client/views/admin/form-products.client.view.html',
+        controller: 'ProductsController',
+        resolve: {
+          productResolve: newProduct
+        },
+        data: {
+          roles: ['admin'],
+          pageTitle: 'Products Create'
+        }
+      })
       .state('admin.products-edit', {
         url: '/:productId/edit',
-        templateUrl: 'modules/products/client/views/form-products.client.view.html',
+        templateUrl: 'modules/products/client/views/admin/form-edit-products.client.view.html',
         controller: 'ProductsController',
-        controllerAs: 'vm',
         resolve: {
           productResolve: getProduct
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle: 'Edit Product {{ productResolve.title }}'
         }
       })
-      .state('admin.products-view', {
-        url: '/:productId',
-        templateUrl: 'modules/products/client/views/view-product.client.view.html',
-        controller: 'ProductsController',
-        controllerAs: 'vm',
-        resolve: {
-          productResolve: getProduct
-        },
-        data: {
-          pageTitle: 'Product {{ productResolve.title }}'
-        }
+      .state('admin.products-bookcover', {
+        url: '/bookcover',
+        controller: 'ProductsController'
       });
   }
 

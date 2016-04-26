@@ -6,6 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Product = mongoose.model('Product'),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -13,20 +15,36 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var product = new Product(req.body);
-  /*product.title = req.body.title;
-  product.author = req.body.author;
-  product.category = req.body.category;
-  product.description = req.body.description;
-  product.price = req.body.price;
-  product.image = req.body.image;
-  product.stock = req.body.stock;
-  product.status = req.body.status;*/
+  product.Title = req.body.Title;
+  product.Author = req.body.Author;
+  product.Category = req.body.Category;
+  product.Description = req.body.Description;
+  product.Price = req.body.Price;
+  product.Image = req.body.Image;
+  product.Stock = req.body.Stock;
+  product.Status = req.body.Status;
+
+  /*var upload = multer(config.uploads.bookCoverUpload).single('newBookCover');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;*/
 
   if(!product){
     return res.status(400).send({
       message: 'please insert the product data '
     });
   }
+
+  /*upload(req, res, function (uploadError) {
+    if(uploadError) {
+      return res.status(400).send({
+        message: 'Error occurred while uploading book cover'
+      });
+    } else {
+      product.Image = config.uploads.bookCoverUpload.dest + req.file.filename;
+    }
+  });*/
 
   product.save(function (err) {
     if (err) {
@@ -59,14 +77,14 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var product = req.product;
 
-  product.title = req.body.title;
-  product.author = req.body.author;
-  product.category = req.body.category;
-  product.description = req.body.description;
-  product.price = req.body.price;
-  product.image = req.body.image;
-  product.stock = req.body.stock;
-  product.status = req.body.status;
+  product.Title = req.body.Title;
+  product.Author = req.body.Author;
+  product.Category = req.body.Category;
+  product.Description = req.body.Description;
+  product.Price = req.body.Price;
+  product.Image = req.body.Image;
+  product.Stock = req.body.Stock;
+  product.Status = req.body.Status;
 
   product.save(function (err) {
     if (err) {
