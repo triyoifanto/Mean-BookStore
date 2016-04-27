@@ -37,7 +37,7 @@ module.exports = function (app) {
     ]
   }));
   app.route('/api/auth/google/callback').get(users.oauthCallback('google'));
-
+/*
   // Setting the linkedin oauth routes
   app.route('/api/auth/linkedin').get(users.oauthCall('linkedin', {
     scope: [
@@ -54,4 +54,5 @@ module.exports = function (app) {
   // Setting the paypal oauth routes
   app.route('/api/auth/paypal').get(users.oauthCall('paypal'));
   app.route('/api/auth/paypal/callback').get(users.oauthCallback('paypal'));
+  */
 };

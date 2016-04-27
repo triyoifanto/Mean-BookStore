@@ -40,8 +40,8 @@ module.exports = {
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
-    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    clientID: process.env.TWITTER_KEY || '8HRJWjgBfdQXVbEkEHxnNmDPV',//'CONSUMER_KEY',
+    clientSecret: process.env.TWITTER_SECRET || 'RZsGNqT95Zy9OwvxUioQcqaqJEWbGtkSEOssc6QdCyqw5Xj6U6',//'CONSUMER_SECRET',
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
@@ -67,12 +67,12 @@ module.exports = {
     sandbox: true
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    from: process.env.MAILER_FROM || 'MAIL_FROM',// set MAIL_FROM i.e ipandto@gmail.com
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      service: process.env.MAILER_SERVICE_PROVIDER || 'MAIL_PROV', //set MAIL_PROV i.e Gmail
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: process.env.MAILER_EMAIL_ID || 'MAILER_ID', // set MAILER_ID i.e ipandto@gmail.com
+        pass: process.env.MAILER_PASSWORD || 'MAILER_PWD' // set MAILER_PWD
       }
     }
   },
