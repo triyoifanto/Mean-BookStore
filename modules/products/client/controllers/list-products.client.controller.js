@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('products.admin').controller('ProductsListController', ['$scope', '$filter', '$http', 'Authentication', 'ProductsService',
-  function ($scope, $filter, $http, Authentication, ProductsService) {
+angular.module('products.admin').controller('ProductsListController', ['$scope', '$filter', 'ProductsService',
+  function ($scope, $filter, ProductsService) {
     ProductsService.query(function (data) {
       $scope.products = data;
       $scope.buildPager();

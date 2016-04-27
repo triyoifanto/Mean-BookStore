@@ -17,7 +17,7 @@
     </div>
     <div ng-hide="pagedItems"><p>No products available</p></div>  
     <div class="text-center">
-      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
     <div class="list-group">
       <a ng-repeat="product in pagedItems | orderBy: 'Title'" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
@@ -46,7 +46,7 @@
       </a>
     </div>
     <div class="text-center">
-      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
   </div>
 </section>
