@@ -1,6 +1,5 @@
 'use strict';
 
-// Use Applicaion configuration module to register a new module
-ApplicationConfiguration.registerModule('products', ['core']);
-ApplicationConfiguration.registerModule('products.admin', ['core.admin']);
-ApplicationConfiguration.registerModule('products.admin.routes', ['core.admin.routes']);
+ApplicationConfiguration.registerModule('products', ['core']);// The core module is required for special route handling; see /core/client/config/core.client.routes
+ApplicationConfiguration.registerModule('products.admin', ['ui.bootstrap.pagination']);
+ApplicationConfiguration.registerModule('products.admin.routes', ['core.admin.routes', 'ui.bootstrap']);

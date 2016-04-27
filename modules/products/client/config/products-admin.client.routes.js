@@ -1,42 +1,72 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Setting up route
-angular.module('products.admin.routes').config(['$stateProvider',
-  function ($stateProvider) {
+  angular
+    .module('products.admin.routes')
+    .config(routeConfig);
+
+  routeConfig.$inject = ['$stateProvider'];
+
+  function routeConfig($stateProvider) {
     $stateProvider
       .state('admin.products', {
         url: '/products',
         templateUrl: 'modules/products/client/views/admin/list-products.client.view.html',
-        controller: 'ProductListController'
+        controller: 'ProductsListController'
       })
-      /*.state('admin.products', {
-        url: '/products/:productId',
-        templateUrl: 'modules/products/client/views/admin/view-products.client.view.html',
-        controller: 'ProductController',
+      .state('admin.products-view', {
+        url: '/:productId',
+        templateUrl: 'modules/products/client/views/admin/view-product.admin.client.view.html',
+        controller: 'ProductsController',
         resolve: {
-          productResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            return Admin.get({
-              productId: $stateParams.productId
-            });
-          }]
+          productResolve: getProduct
+        },
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle: 'Products Create'
         }
-      })*/
-      .state('admin.products-add', {
-        url: '/products/add',
-        templateUrl: 'modules/products/client/views/admin/add-products.client.view.html',
-        controller: 'ProductController'
       })
-      /*.state('admin.product-edit', {
-        url: '/products/:productId/edit',
-        templateUrl: 'modules/products/client/views/admin/edit-product.client.view.html',
-        controller: 'ProductController',
+      .state('admin.products-create', {
+        url: '/products-create',
+        templateUrl: 'modules/products/client/views/admin/form-products.client.view.html',
+        controller: 'ProductsController',
         resolve: {
-          productResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            return Admin.get({
-              productId: $stateParams.productId
-            });
-          }]
+          productResolve: newProduct
+        },
+        data: {
+          roles: ['admin'],
+          pageTitle: 'Products Create'
         }
-      })*/;
+      })
+      .state('admin.products-edit', {
+        url: '/:productId/edit',
+        templateUrl: 'modules/products/client/views/admin/form-edit-products.client.view.html',
+        controller: 'ProductsController',
+        resolve: {
+          productResolve: getProduct
+        },
+        data: {
+          roles: ['admin'],
+          pageTitle: 'Edit Product {{ productResolve.title }}'
+        }
+      })
+      .state('admin.products-bookcover', {
+        url: '/bookcover',
+        controller: 'ProductsController'
+      });
   }
-]);
+
+  getProduct.$inject = ['$stateParams', 'ProductsService'];
+
+  function getProduct($stateParams, ProductsService) {
+    return ProductsService.get({
+      productId: $stateParams.productId
+    }).$promise;
+  }
+
+  newProduct.$inject = ['ProductsService'];
+
+  function newProduct(ProductsService) {
+    return new ProductsService();
+  }
+}());

@@ -1204,6 +1204,9 @@ button.dim:active:before {
     position: relative;
 }
 /* PAGINATIN */
+.pagination {
+    margin: 0 0 10px;
+}
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
@@ -1442,10 +1445,14 @@ a.list-group-item.active:focus {
     margin-top: 10px;
 }
 .list-group-item-text {
-    margin: 0 0 10px;
+    margin: 0;
     color: inherit;
     font-size: 12px;
     line-height: inherit;
+}
+
+.list-group-item-text:last-child {
+    margin: 0 0 10px;
 }
 .no-padding .list-group-item {
     border-left: none;
@@ -1840,6 +1847,10 @@ div.dt-button-info {
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     width: 100%;
     font-size: 14px;
+}
+.search-product-homepage.form-control {
+    display: inline-block;
+    width: 50%;
 }
 .form-control:focus,
 .single-line:focus {

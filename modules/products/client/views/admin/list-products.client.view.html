@@ -1,26 +1,52 @@
-<h1>TODO: Display Product List Here</h1>
-<p>TODO: Display info if no products available</p>
-<p>TODO: Button Add New + Edit + Delete</p>
-
-<section ng-controller="ProductListController">
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Products</h1>
+<section>
+  <div class="wrapper wrapper-content">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-4">
+          <h1>Products</h1>
+        </div>
       </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 2em">
+          <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+        </div>
+        <div class="col-md-6 text-right" style="margin-top: 2em">
+          <a ui-sref="admin.products-create()" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New Product</a>
+        </div>
       </div>
     </div>
+    <div ng-hide="pagedItems"><p>No products available</p></div>  
+    <div class="text-center">
+      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div>
+    <div class="list-group">
+      <a ng-repeat="product in pagedItems | orderBy: 'Title'" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
+        <div class="row">
+          <div class="col-xs-12 col-sm-2">
+            <h4 class="list-group-item-heading" ng-bind="product.Title"></h4>
+            <img ng-src="{{product.Image}}" class="img-responsive" width="90px">
+          </div>
+          <div class="col-xs-12 col-sm-10">  
+            <h4 class="list-group-item-heading">Summary</h4>       
+            <p class="list-group-item-text small" ng-bind="product.Description"></p>
+            <br>
+            <div class="row">
+              <div class="col-xs-12 col-sm-3">
+                <p class="list-group-item-text small">Price: <span ng-bind="product.Price | currency"></span></p>           
+                <p class="list-group-item-text small">Stock: <span ng-bind="product.Stock"></span></p>
+                <p class="list-group-item-text small">Status: <span ng-bind="product.Status"></span></p>
+              </div>
+              <div class="col-xs-12 col-sm-6">              
+                <p class="list-group-item-text">Category: <span ng-bind="product.Category"></span></p>
+                <p class="list-group-item-text">Author: <span ng-bind="product.Author"></span></p>
+              </div>
+            </div>          
+          </div>
+        </div>      
+      </a>
+    </div>
+    <div class="text-center">
+      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div>
   </div>
-  <a href="/admin/products/add" class="btn btn-primary">Add New Product</a>
-  <div class="list-group">
-    <a ng-repeat="product in pagedItems" ui-sref="admin.products({productId: product._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="product.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="product.roles"></p>
-      <p class="list-group-item-text" ng-bind="product.email"></p>
-    </a>
-  </div>
-  {{pagedItems}}
-  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 </section>

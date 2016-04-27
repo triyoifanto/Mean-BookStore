@@ -95,7 +95,7 @@ The returned value will take this shape when the password is valid:
 ```javascript
 {
   errors: [
-      'The password must be at least 10 characters long.',
+      'The password must be at least 6 characters long.',
       'The password must contain at least one uppercase letter.',
       'The password must contain at least one number.',
       'The password must contain at least one special character.'
@@ -103,7 +103,7 @@ The returned value will take this shape when the password is valid:
     failedTests         : [ 0, 4, 5, 6 ],
     passedTests         : [ 1, 2, 3 ],
     requiredTestErrors  : [
-      'The password must be at least 10 characters long.',
+      'The password must be at least 6 characters long.',
     ],
     optionalTestErrors  : [
       'The password must contain at least one uppercase letter.',
@@ -158,7 +158,7 @@ var owasp = require('owasp-password-strength-test');
 owasp.config({
   allowPassphrases       : true,
   maxLength              : 128,
-  minLength              : 10,
+  minLength              : 6,
   minPhraseLength        : 20,
   minOptionalTestsToPass : 4,
 });

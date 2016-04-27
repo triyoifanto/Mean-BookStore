@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('products.admin').controller('ProductListController', ['$scope', '$filter', 'Admin',
-  function ($scope, $filter, Admin) {
-    Admin.query(function (data) {
+angular.module('products.admin').controller('ProductsListController', ['$scope', '$filter', '$http', 'Authentication', 'ProductsService',
+  function ($scope, $filter, $http, Authentication, ProductsService) {
+    ProductsService.query(function (data) {
       $scope.products = data;
       $scope.buildPager();
+      $scope.setPage();
     });
 
     $scope.buildPager = function () {
       $scope.pagedItems = [];
-      $scope.itemsPerPage = 20;
+      $scope.itemsPerPage = 4;
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
@@ -27,7 +28,5 @@ angular.module('products.admin').controller('ProductListController', ['$scope', 
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
     };
-
-
   }
 ]);
