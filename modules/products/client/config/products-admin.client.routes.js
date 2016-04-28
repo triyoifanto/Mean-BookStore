@@ -51,7 +51,7 @@
         }
       })
       .state('admin.products-bookcover', {
-        url: '/bookcover',
+        url: '/productsUpload',
         controller: 'ProductsController'
       });
   }
