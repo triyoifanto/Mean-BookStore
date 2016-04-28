@@ -99,7 +99,7 @@
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary" ng-click="create(productForm.$valid)">Add</button>
                       <button type="button" ng-click="clearForm();" class="btn btn-primary">Clear</button>
-                      <button type="button" ng-click="admin.products()" class="btn btn-primary">Cancel</button>
+                      <a ui-sref="admin.products()" class="btn btn-primary">Cancel</a>
                     </div>
                     
                     <div ng-show="error" class="text-danger">
