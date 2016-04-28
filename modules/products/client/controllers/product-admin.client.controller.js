@@ -73,8 +73,12 @@ angular
 
     // Cancel the upload process
     $scope.cancelUpload = function () {
-      $scope.uploader.clearQueue();
+      $scope.uploader.clearQueue();      
       $scope.imageURL = $scope.product.Image;
+
+      if($scope.imageURL === undefined) {
+        $scope.imageURL = '/modules/products/client/img/no-cover.jpg';
+      }
     };
 
     // Remove existing Product
@@ -130,7 +134,7 @@ angular
     $scope.clearForm = function(){
       $scope.productForm.$setPristine();
       $scope.product = null;
-      $scope.imageURL = null;
+      $scope.imageURL = '/modules/products/client/img/no-cover.jpg';
     };  
   }
 ]);

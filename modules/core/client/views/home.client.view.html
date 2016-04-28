@@ -28,14 +28,14 @@
           <div class="row">
             <div class="text-right col-xs-12">
               <span><strong>Sorting by:</strong></span>
-              <select ng-change="fieldSortingChanged()" ng-model="fieldOption" ng-init={{fieldOption}}>
+              <select ng-change="fieldSortingChanged()" ng-model="fieldOption" ng-init="fieldOption">
                 <option value="Title">Title</option>
                 <option value="Author">Author</option>
                 <option value="Category">Category</option>
                 <option value="Price">Price</option>
                 <option value="CreatedDate">Date</option>
               </select>
-              <select ng-change="orderSortingChanged()" ng-model="orderOption" ng-init={{orderOption}}>
+              <select ng-change="orderSortingChanged()" ng-model="orderOption" ng-init="orderOption">
                 <option value="false">Ascending</option>
                 <option value="true">Descending</option>
               </select>
