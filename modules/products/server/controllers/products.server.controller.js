@@ -24,27 +24,11 @@ exports.create = function (req, res) {
   product.Stock = req.body.Stock;
   product.Status = req.body.Status;
 
-  /*var upload = multer(config.uploads.bookCoverUpload).single('newBookCover');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  
-  // Filtering to upload only images
-  upload.fileFilter = profileUploadFileFilter;*/
-
   if(!product){
     return res.status(400).send({
       message: 'please insert the product data '
     });
   }
-
-  /*upload(req, res, function (uploadError) {
-    if(uploadError) {
-      return res.status(400).send({
-        message: 'Error occurred while uploading book cover'
-      });
-    } else {
-      product.Image = config.uploads.bookCoverUpload.dest + req.file.filename;
-    }
-  });*/
 
   product.save(function (err) {
     if (err) {
@@ -52,8 +36,26 @@ exports.create = function (req, res) {
         message: 'test ' + errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(product);
+      res.json(product);      
     }
+  });
+};
+
+exports.bookcoverUpload = function (req, res) {
+  var upload = multer(config.uploads.bookCoverUpload).single('newBookCover');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
+
+  upload(req, res, function (uploadError) {
+    if(uploadError) {
+      return res.status(400).send({
+        message: 'Error occurred while uploading profile picture'
+      });
+    } else {
+      res.json(config.uploads.bookCoverUpload.dest + req.file.filename);        
+    }      
   });
 };
 
@@ -85,6 +87,7 @@ exports.update = function (req, res) {
   product.Image = req.body.Image;
   product.Stock = req.body.Stock;
   product.Status = req.body.Status;
+  product.ModifiedDate = Date.now();
 
   product.save(function (err) {
     if (err) {
@@ -118,7 +121,7 @@ exports.delete = function (req, res) {
  * List of Products
  */
 exports.list = function (req, res) {
-  Product.find().sort('-title').populate('product', 'title').exec(function (err, products) {
+  Product.find().sort('-CreatedDate').populate('product', 'CreatedDate').exec(function (err, products) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -140,7 +143,7 @@ exports.productByID = function (req, res, next, id) {
     });
   }
 
-  Product.findById(id).populate('user', 'displayName').exec(function (err, product) {
+  Product.findById(id).populate('product', 'Title').exec(function (err, product) {
     if (err) {
       return next(err);
     } else if (!product) {

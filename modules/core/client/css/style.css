@@ -5247,7 +5247,7 @@ del {
 }
 .product-imitation {
     text-align: center;
-    padding: 90px 0;
+    padding: 20px 0;
     background-color: #f8f8f9;
     color: #bebec3;
     font-weight: 600;
@@ -5326,6 +5326,9 @@ table.shoping-cart-table tr td:last-child {
 }
 .product-images {
     margin: 0 20px;
+}
+.productClientTitle {
+    margin-top: 0;
 }
 /* Social feed */
 .social-feed-separated .social-feed-box {

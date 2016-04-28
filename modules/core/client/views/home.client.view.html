@@ -19,30 +19,52 @@
             </div>          
           </div>
           <br>
-          <div class="text-center">
-            <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+          <div ng-hide="pagedItems.length !== 0" class="text-center"><p>No Product available.</p></div>
+          <div class="row text-center">
+            <div class="col-xs-12">
+              <uib-pagination boundary-links="true" ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+            </div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="product in pagedItems | orderBy: 'Title'">
+            <div class="text-right col-xs-12">
+              <span><strong>Sorting by:</strong></span>
+              <select ng-change="fieldSortingChanged()" ng-model="fieldOption" ng-init="fieldOption">
+                <option value="Title">Title</option>
+                <option value="Author">Author</option>
+                <option value="Category">Category</option>
+                <option value="Price">Price</option>
+                <option value="CreatedDate">Date</option>
+              </select>
+              <select ng-change="orderSortingChanged()" ng-model="orderOption" ng-init="orderOption">
+                <option value="false">Ascending</option>
+                <option value="true">Descending</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="product in pagedItems | orderBy: fieldSorting">
               <div class="ibox">
                 <div class="ibox-content product-box">
                   <div class="product-imitation">
-                    <img ng-src="{{product.Image}}" class="img-responsive" width="110px" style="margin: 0 auto;">
+                    <img ng-src="{{product.Image}}" class="img-responsive" width="150px" style="margin: 0 auto;">
                   </div>
                   <div class="product-desc">
                     <span class="product-price">{{product.Price | currency}}</span>
                     <a class="product-name">{{product.Title}}</a>
                     <div class="small m-t-xs">{{product.Author}}</div>
                     <div class="m-t text-righ">
-                        <a ui-sref="admin.products-view({productId: product._id})" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                        <a ui-sref="products-view({productId: product._id})" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>          
           </div>
-          <div class="text-center">
-            <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+          <div class="row text-center">
+            <div class="col-xs-12">
+              <uib-pagination boundary-links="true" ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+            </div>
           </div>
         </div>
       </div>

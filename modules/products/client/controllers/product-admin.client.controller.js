@@ -14,7 +14,7 @@ angular
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({
-      url: 'api/products/products-bookcover',
+      url: 'api/productsUpload',
       alias: 'newBookCover'
     });
 
@@ -47,7 +47,7 @@ angular
       $scope.success = true;
 
       // Populate user object
-      $scope.product = Authentication.product = response;
+      $scope.product.Image = productResolve = response;
 
       // Clear upload buttons
       $scope.cancelUpload();
@@ -73,8 +73,12 @@ angular
 
     // Cancel the upload process
     $scope.cancelUpload = function () {
-      $scope.uploader.clearQueue();
-      $scope.imageURL = null;
+      $scope.uploader.clearQueue();      
+      $scope.imageURL = $scope.product.Image;
+
+      if($scope.imageURL === undefined) {
+        $scope.imageURL = '/modules/products/client/img/no-cover.jpg';
+      }
     };
 
     // Remove existing Product
@@ -93,8 +97,7 @@ angular
       }
 
       // set product model to newProduct variable
-      var newProduct = $scope.product; 
-      newProduct.Image = $scope.imageURL;    
+      var newProduct = $scope.product;
 
       // save newProduct, redirect to detail page if success, otherwise display an error message
       newProduct.$save(function(){
@@ -131,7 +134,7 @@ angular
     $scope.clearForm = function(){
       $scope.productForm.$setPristine();
       $scope.product = null;
-      $scope.imageURL = null;
+      $scope.imageURL = '/modules/products/client/img/no-cover.jpg';
     };  
   }
 ]);

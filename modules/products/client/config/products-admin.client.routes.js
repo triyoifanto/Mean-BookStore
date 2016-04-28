@@ -15,19 +15,19 @@
         controller: 'ProductsListController'
       })
       .state('admin.products-view', {
-        url: '/:productId',
+        url: '/products/:productId',
         templateUrl: 'modules/products/client/views/admin/view-product.admin.client.view.html',
         controller: 'ProductsController',
         resolve: {
           productResolve: getProduct
         },
         data: {
-          roles: ['user', 'admin'],
-          pageTitle: 'Products Create'
+          roles: ['user', 'admin', 'guest'],
+          pageTitle: 'Products View'
         }
       })
       .state('admin.products-create', {
-        url: '/products-create',
+        url: '/products/products-create',
         templateUrl: 'modules/products/client/views/admin/form-products.client.view.html',
         controller: 'ProductsController',
         resolve: {
@@ -39,7 +39,7 @@
         }
       })
       .state('admin.products-edit', {
-        url: '/:productId/edit',
+        url: '/products/:productId/edit',
         templateUrl: 'modules/products/client/views/admin/form-edit-products.client.view.html',
         controller: 'ProductsController',
         resolve: {
@@ -51,7 +51,7 @@
         }
       })
       .state('admin.products-bookcover', {
-        url: '/bookcover',
+        url: '/productsUpload',
         controller: 'ProductsController'
       });
   }

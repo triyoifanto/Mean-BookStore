@@ -15,12 +15,28 @@
         </div>
       </div>
     </div>
-    <div ng-hide="pagedItems"><p>No products available</p></div>  
+    <div ng-hide="pagedItems.length !== 0"><p>No products available</p></div>  
     <div class="text-center">
-      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div>
+    <div class="row">
+      <div class="text-right col-xs-12">
+        <span><strong>Sorting by:</strong></span>
+        <select ng-change="fieldSortingChanged()" ng-model="fieldOption" ng-init="fieldOption">
+          <option value="Title">Title</option>
+          <option value="Author">Author</option>
+          <option value="Category">Category</option>
+          <option value="Price">Price</option>
+          <option value="CreatedDate">Date</option>
+        </select>
+        <select ng-change="orderSortingChanged()" ng-model="orderOption" ng-init="orderOption">
+          <option value="false">Ascending</option>
+          <option value="true" selected="selected">Descending</option>
+        </select>
+      </div>
     </div>
     <div class="list-group">
-      <a ng-repeat="product in pagedItems | orderBy: 'Title'" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
+      <a ng-repeat="product in pagedItems" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
         <div class="row">
           <div class="col-xs-12 col-sm-2">
             <h4 class="list-group-item-heading" ng-bind="product.Title"></h4>
@@ -46,7 +62,7 @@
       </a>
     </div>
     <div class="text-center">
-      <uib-pagination total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
   </div>
 </section>

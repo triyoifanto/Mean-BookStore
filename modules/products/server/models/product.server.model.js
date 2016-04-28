@@ -62,6 +62,14 @@ var ProductSchema = new Schema({
     type: String,
     trim: true,
     default: ''
+  },
+  CreatedDate: {
+    type: Date,
+    default: Date.now
+  },
+  ModifiedDate: {
+    type: Date,
+    default: Date.now
   }
 });
 
