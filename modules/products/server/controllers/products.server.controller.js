@@ -87,6 +87,7 @@ exports.update = function (req, res) {
   product.Image = req.body.Image;
   product.Stock = req.body.Stock;
   product.Status = req.body.Status;
+  product.ModifiedDate = Date.now();
 
   product.save(function (err) {
     if (err) {
@@ -120,7 +121,7 @@ exports.delete = function (req, res) {
  * List of Products
  */
 exports.list = function (req, res) {
-  Product.find().sort('-title').populate('product', 'title').exec(function (err, products) {
+  Product.find().sort('-CreatedDate').populate('product', 'CreatedDate').exec(function (err, products) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -142,7 +143,7 @@ exports.productByID = function (req, res, next, id) {
     });
   }
 
-  Product.findById(id).populate('user', 'displayName').exec(function (err, product) {
+  Product.findById(id).populate('product', 'Title').exec(function (err, product) {
     if (err) {
       return next(err);
     } else if (!product) {

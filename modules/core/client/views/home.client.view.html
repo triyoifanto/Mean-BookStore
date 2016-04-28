@@ -20,11 +20,30 @@
           </div>
           <br>
           <div ng-hide="pagedItems" class="text-center"><p>No Product available.</p></div>
-          <div class="text-center">
-            <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+          <div class="row text-center">
+            <div class="col-xs-12">
+              <uib-pagination boundary-links="true" ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+            </div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="product in pagedItems | orderBy: 'Title'">
+            <div class="text-right col-xs-12">
+              <span><strong>Sorting by:</strong></span>
+              <select ng-change="fieldSortingChanged()" ng-model="fieldOption" ng-init={{fieldOption}}>
+                <option value="Title">Title</option>
+                <option value="Author">Author</option>
+                <option value="Category">Category</option>
+                <option value="Price">Price</option>
+                <option value="CreatedDate">Date</option>
+              </select>
+              <select ng-change="orderSortingChanged()" ng-model="orderOption" ng-init={{orderOption}}>
+                <option value="false">Ascending</option>
+                <option value="true">Descending</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="product in pagedItems | orderBy: fieldSorting">
               <div class="ibox">
                 <div class="ibox-content product-box">
                   <div class="product-imitation">
@@ -42,8 +61,10 @@
               </div>
             </div>          
           </div>
-          <div class="text-center">
-            <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+          <div class="row text-center">
+            <div class="col-xs-12">
+              <uib-pagination boundary-links="true" ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+            </div>
           </div>
         </div>
       </div>
