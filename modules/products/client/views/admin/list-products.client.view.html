@@ -15,9 +15,9 @@
         </div>
       </div>
     </div>
-    <div ng-hide="pagedItems"><p>No products available</p></div>  
+    <div ng-hide="pagedItems.length !== 0"><p>No products available</p></div>  
     <div class="text-center">
-      <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
     <div class="row">
       <div class="text-right col-xs-12">
@@ -62,7 +62,7 @@
       </a>
     </div>
     <div class="text-center">
-      <uib-pagination ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+      <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
   </div>
 </section>

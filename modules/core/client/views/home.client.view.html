@@ -19,10 +19,10 @@
             </div>          
           </div>
           <br>
-          <div ng-hide="pagedItems" class="text-center"><p>No Product available.</p></div>
+          <div ng-hide="pagedItems.length !== 0" class="text-center"><p>No Product available.</p></div>
           <div class="row text-center">
             <div class="col-xs-12">
-              <uib-pagination boundary-links="true" ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+              <uib-pagination boundary-links="true" ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
             </div>
           </div>
           <div class="row">
@@ -63,7 +63,7 @@
           </div>
           <div class="row text-center">
             <div class="col-xs-12">
-              <uib-pagination boundary-links="true" ng-show="pagedItems" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+              <uib-pagination boundary-links="true" ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
             </div>
           </div>
         </div>
