@@ -40,7 +40,7 @@
       }
 
       function successCallback(res) {
-        $state.go('orders.view', {
+        $state.go('orders.list', {
           orderId: res._id
         });
       }

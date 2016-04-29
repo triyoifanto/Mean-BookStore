@@ -34,7 +34,7 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
     $scope.fieldSortingChanged = function () {
       $scope.fieldSorting = $scope.fieldOption;
       
-      if($scope.orderOption === "true") {
+      if($scope.orderOption === 'true') {
         $scope.fieldSorting = '-' + $scope.fieldSorting;
       }
 
@@ -42,7 +42,7 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
     };
 
     $scope.orderSortingChanged = function () {
-      if($scope.orderOption === "true") {
+      if($scope.orderOption ==='"true') {
         $scope.fieldSorting = '-' + $scope.fieldSorting;
       } else {
         $scope.fieldSorting = $scope.fieldOption;

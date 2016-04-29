@@ -1,6 +1,6 @@
 (function (app) {
   'use strict';
 
-  app.registerModule('orders');
-  app.registerModule('orders.admin', ['core.admin']);
+  app.registerModule('orders', ['core']);
+  app.registerModule('orders.admin', ['ui.bootstrap.pagination']);
 })(ApplicationConfiguration);
