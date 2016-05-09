@@ -33,6 +33,6 @@ angular
 
     $scope.chooseImage = function(selectedImage){
       $scope.selectedImage = selectedImage;
-    }
+    };
   }
 ]);
