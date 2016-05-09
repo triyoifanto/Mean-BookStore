@@ -45,10 +45,10 @@
                             <td ng-init="status=order.status">
                                 <span ng-class="{'label label-primary': status === 'Pending', 
                                                 'label label-success': status === 'Shipped',
-                                                'label label-danger': status === 'Canceled' }">{{status}}<span>
+                                                'label label-danger': status === 'Cancelled' }">{{status}}<span>
                             </td>                            
                             <td>
-                                ${{order.total}}
+                                {{order.total | currency}}
                             </td>
                             <td class="text-right">
                                 <div class="btn-group">

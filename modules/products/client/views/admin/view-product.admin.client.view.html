@@ -1,11 +1,9 @@
 <section>
   <div class="wrapper wrapper-content">
     <div class="page-header">
+    <div class="row text-danger" ng-bind="error"></div>
       <div class="row">
-        <div class="col-md-6">
-          <h1 ng-bind="product.Title"></h1>
-        </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 text-center">
           <a class="btn btn-primary" ng-show="authentication.user.roles[0] === 'admin'" ui-sref="admin.products-create()" title="add another new product">
             <i class="glyphicon glyphicon-plus"></i>
           </a>
@@ -17,12 +15,22 @@
           </a>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-capitalize" ng-bind="product.Title"></h1>
+        </div>
+      </div>
+    </div>    
     <div class="row">
       <div class="col-md-8">
         <div class="row">
+          <div class="col-md-3"><strong>ISBN</strong></div>
+          <div class="col-md-6"><span class="text-capitalize" ng-bind="product.ISBN"></span></div>
+        </div>
+        <hr/>
+        <div class="row">
           <div class="col-md-3"><strong>Author</strong></div>
-          <div class="col-md-6" ng-bind="product.Author"></div>
+          <div class="col-md-6"><span class="text-capitalize" ng-bind="product.Author"></span></div>
         </div>
         <hr/>
         <div class="row">
@@ -32,7 +40,12 @@
         <hr/>
         <div class="row">
           <div class="col-md-3"><strong>Description</strong></div>
-          <div class="col-md-6" ng-bind="product.Description"></div>
+          <div class="col-md-6">
+            <span ng-bind="product.Description"></span><span ng-hide="isReadMore || isShortDesc">...</span>
+            <br>
+            <span class="label label-primary" ng-hide="isReadMore || isShortDesc" ng-click="readMore(true)"> read more </span>
+            <span class="label label-danger" ng-show="isReadMore" ng-click="readMore(false)"> read less </span>
+          </div>
         </div>
         <hr/>
         <div class="row">
@@ -42,17 +55,26 @@
         <hr/>
         <div class="row">
           <div class="col-md-3"><strong>Stock</strong></div>
-          <div class="col-md-6" ng-bind="product.Stock"></div>
+          <div class="col-md-6"><span ng-bind="product.Stock"></span> <span>pcs</span></div>
         </div>      
         <hr/>
         <div class="row">
           <div class="col-md-3"><strong>Status</strong></div>
-          <div class="col-md-6" ng-bind="product.Status"></div>
+          <div class="col-md-6">
+            <span ng-if="product.Status === 'instock'">
+              <span class="label label-primary">In Stock</span>
+            </span>
+            <span ng-if="product.Status === 'outofstock'">
+              <span class="label label-danger">Out of Stock</span>
+            </span>
+          </div>
         </div>
         <div class="row"></div>
       </div>
       <div class="col-md-4">
-      	<img ng-src="{{product.Image}}" class="img-responsive">
+        <img ng-src="{{selectedImage}}" class="img-responsive">
+        <img ng-src={{product.Image}} class="img-thumbnail" width="50px" ng-click="chooseImage(product.Image)">
+        <img ng-src={{product.SecondaryImage}} class="img-thumbnail" width="50px" ng-click="chooseImage(product.SecondaryImage)">
       </div>
     </div>
     <br>

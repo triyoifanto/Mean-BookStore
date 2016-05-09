@@ -17,10 +17,10 @@ h6 {
 h1 {
     font-size: 30px;
 }
-h2 {
+h2, .text-large {
     font-size: 24px;
 }
-h3 {
+h3, .text-medium {
     font-size: 16px;
 }
 h4 {
@@ -37,6 +37,9 @@ h4,
 h5 {
     margin-top: 5px;
     font-weight: 600;
+}
+.text-large {
+    font-weight: 100;
 }
 .nav > li > a {
     color: #a7b1c2;
@@ -1433,6 +1436,9 @@ button.dim:active:before {
     overflow-y: scroll;
 }
 /* LIST GROUP */
+.list-group-item.ng-scope:nth-child(odd) {
+    background-color: white;
+}
 a.list-group-item.active,
 a.list-group-item.active:hover,
 a.list-group-item.active:focus {

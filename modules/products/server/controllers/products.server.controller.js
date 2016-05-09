@@ -15,14 +15,21 @@ var path = require('path'),
  */
 exports.create = function (req, res) {
   var product = new Product(req.body);
+  product.ISBN = req.body.ISBN;
   product.Title = req.body.Title;
   product.Author = req.body.Author;
   product.Category = req.body.Category;
   product.Description = req.body.Description;
   product.Price = req.body.Price;
   product.Image = req.body.Image;
+  product.SecondaryImage = req.body.SecondaryImage;
   product.Stock = req.body.Stock;
-  product.Status = req.body.Status;
+
+  if(product.Stock > 0){
+    product.Status = 'instock';
+  } else {
+    product.Status = 'outofstock';
+  }
 
   if(!product){
     return res.status(400).send({
@@ -33,7 +40,7 @@ exports.create = function (req, res) {
   product.save(function (err) {
     if (err) {
       return res.status(400).send({
-        message: 'test ' + errorHandler.getErrorMessage(err)
+        message: errorHandler.getErrorMessage(err)
       });
     } else {
       res.json(product);      
@@ -78,15 +85,22 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var product = req.product;
-
+  product.ISBN = req.body.ISBN;
   product.Title = req.body.Title;
   product.Author = req.body.Author;
   product.Category = req.body.Category;
   product.Description = req.body.Description;
   product.Price = req.body.Price;
   product.Image = req.body.Image;
+  product.SecondaryImage = req.body.SecondaryImage;
   product.Stock = req.body.Stock;
-  product.Status = req.body.Status;
+
+  if(product.Stock > 0){
+    product.Status = 'instock';
+  } else {
+    product.Status = 'outofstock';
+  }
+  
   product.ModifiedDate = Date.now();
 
   product.save(function (err) {
@@ -105,6 +119,12 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var product = req.product;
+
+  if(product.Stock > 0){
+    return res.status(400).send({
+      message: 'Cannot delete this product. Stock is more than 0.'
+    });
+  }
 
   product.remove(function (err) {
     if (err) {

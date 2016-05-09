@@ -1,80 +1,82 @@
 <section>
-  <div class="page-header">
-    <h1>{{vm.order._id ? 'Edit Order' : 'New Order'}}</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="vm.form.orderForm" class="form-horizontal" ng-submit="vm.save(vm.form.orderForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="orderNo">Order No</label>
-          <input name="orderNo" type="text" ng-model="vm.order.orderNo" id="orderNo" class="form-control" placeholder="Order No" required>
-          <div ng-messages="vm.form.orderForm.orderNo.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Order No is required.</p>
+  <div class="wrapper wrapper-content">
+    <div class="page-header">
+      <h1>{{vm.order._id ? 'Edit Order' : 'New Order'}}</h1>
+    </div>
+    <div class="col-md-12">
+      <form name="vm.form.orderForm" class="form-horizontal" ng-submit="vm.save(vm.form.orderForm.$valid)" novalidate>
+        <fieldset>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="orderNo">Order No</label>
+            <input name="orderNo" type="text" ng-model="vm.order.orderNo" id="orderNo" class="form-control" placeholder="Order No" required>
+            <div ng-messages="vm.form.orderForm.orderNo.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Order No is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="shippingAddr">Shipping Addr</label>
-          <input name="shippingAddr" type="text" ng-model="vm.order.shippingAddr" id="shippingAddr" class="form-control" placeholder="Shipping Addr" required>
-          <div ng-messages="vm.form.orderForm.shippingAddr.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Shipping Addr is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="shippingAddr">Shipping Addr</label>
+            <input name="shippingAddr" type="text" ng-model="vm.order.shippingAddr" id="shippingAddr" class="form-control" placeholder="Shipping Addr" required>
+            <div ng-messages="vm.form.orderForm.shippingAddr.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Shipping Addr is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="billingAddr">Billing Addr</label>
-          <input name="billingAddr" type="text" ng-model="vm.order.billingAddr" id="billingAddr" class="form-control" placeholder="Billing Addr" required>
-          <div ng-messages="vm.form.orderForm.billingAddr.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Billing Addr is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="billingAddr">Billing Addr</label>
+            <input name="billingAddr" type="text" ng-model="vm.order.billingAddr" id="billingAddr" class="form-control" placeholder="Billing Addr" required>
+            <div ng-messages="vm.form.orderForm.billingAddr.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Billing Addr is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="shipping">Shipping</label>
-          <input name="shipping" type="text" ng-model="vm.order.shipping" id="shipping" class="form-control" placeholder="Shipping" required>
-          <div ng-messages="vm.form.orderForm.shipping.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Shipping is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="shipping">Shipping</label>
+            <input name="shipping" type="text" ng-model="vm.order.shipping" id="shipping" class="form-control" placeholder="Shipping" required>
+            <div ng-messages="vm.form.orderForm.shipping.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Shipping is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="subTotal">Sub Total</label>
-          <input name="subTotal" type="text" ng-model="vm.order.subTotal" id="subTotal" class="form-control" placeholder="Sub Total" required>
-          <div ng-messages="vm.form.orderForm.subTotal.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Sub Total is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="subTotal">Sub Total</label>
+            <input name="subTotal" type="text" ng-model="vm.order.subTotal" id="subTotal" class="form-control" placeholder="Sub Total" required>
+            <div ng-messages="vm.form.orderForm.subTotal.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Sub Total is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="total">Total</label>
-          <input name="total" type="text" ng-model="vm.order.total" id="total" class="form-control" placeholder="Total" required>
-          <div ng-messages="vm.form.orderForm.total.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Total is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="total">Total</label>
+            <input name="total" type="text" ng-model="vm.order.total" id="total" class="form-control" placeholder="Total" required>
+            <div ng-messages="vm.form.orderForm.total.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Total is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="status">status</label>
-          <input name="status" type="text" ng-model="vm.order.status" id="status" class="form-control" placeholder="Status" required>
-          <div ng-messages="vm.form.orderForm.status.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Status is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="status">status</label>
+            <input name="status" type="text" ng-model="vm.order.status" id="status" class="form-control" placeholder="Status" required>
+            <div ng-messages="vm.form.orderForm.status.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Status is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="paymentType">Payment Type</label>
-          <input name="paymentType" type="text" ng-model="vm.order.paymentType" id="paymentType" class="form-control" placeholder="Payment Type" required>
-          <div ng-messages="vm.form.orderForm.paymentType.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Payment Type is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="paymentType">Payment Type</label>
+            <input name="paymentType" type="text" ng-model="vm.order.paymentType" id="paymentType" class="form-control" placeholder="Payment Type" required>
+            <div ng-messages="vm.form.orderForm.paymentType.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Payment Type is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="creditCardNo">Credit Card No</label>
-          <input name="creditCardNo" type="text" ng-model="vm.order.creditCardNo" id="creditCardNo" class="form-control" placeholder="Credit Card No" required>
-          <div ng-messages="vm.form.orderForm.creditCardNo.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Credit Card No is required.</p>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="creditCardNo">Credit Card No</label>
+            <input name="creditCardNo" type="text" ng-model="vm.order.creditCardNo" id="creditCardNo" class="form-control" placeholder="Credit Card No" required>
+            <div ng-messages="vm.form.orderForm.creditCardNo.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Credit Card No is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.order._id ? 'Update' : 'Create'}}</button>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default">{{vm.order._id ? 'Update' : 'Create'}}</button>
+          </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </section>

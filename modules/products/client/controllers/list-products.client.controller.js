@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('products.admin').controller('ProductsListController', ['$scope', '$filter', 'ProductsService',
-  function ($scope, $filter, ProductsService) {
+angular.module('products.admin').controller('ProductsListController', ['$scope', '$filter', 'ProductsService', '$location',
+  function ($scope, $filter, ProductsService, $location) {
     ProductsService.query(function (data) {
       $scope.products = data;
-      $scope.buildPager();
+      $scope.currentLocation = $location.path();
       $scope.fieldOption = 'CreatedDate';
       $scope.orderOption = 'true';
+      //$scope.isReadMore = false;
+      //$scope.isShortDesc = true;
+      $scope.buildPager();
     });
 
     $scope.buildPager = function () {
@@ -18,6 +21,13 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
 
     $scope.figureOutItemsToDisplay = function () {
       $scope.filteredItems = $filter('orderBy')($scope.products, $scope.fieldSorting);
+      
+      if($scope.currentLocation === '/') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, {
+          'Status': 'instock'
+        });
+      }
+
       $scope.filteredItems = $filter('filter')($scope.filteredItems, {
         $: $scope.search
       });
@@ -42,7 +52,7 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
     };
 
     $scope.orderSortingChanged = function () {
-      if($scope.orderOption ==='"true') {
+      if($scope.orderOption ==='true') {
         $scope.fieldSorting = '-' + $scope.fieldSorting;
       } else {
         $scope.fieldSorting = $scope.fieldOption;
@@ -50,5 +60,11 @@ angular.module('products.admin').controller('ProductsListController', ['$scope',
 
       $scope.figureOutItemsToDisplay();
     };
+
+    // button read more or less
+    /*$scope.readMore = function(isReadMore, $event){
+      $scope.isReadMore = isReadMore;
+      $event.stopPropagation();
+    };*/
   }
 ]);

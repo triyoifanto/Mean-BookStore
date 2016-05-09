@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div ng-hide="pagedItems.length !== 0"><p>No products available</p></div>  
+    <div ng-hide="pagedItems.length !== 0"><p>No products available</p></div>      
     <div class="text-center">
       <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
@@ -36,30 +36,46 @@
       </div>
     </div>
     <div class="list-group">
-      <a ng-repeat="product in pagedItems" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
+      <div ng-repeat="product in pagedItems" ui-sref="admin.products-view({productId: product._id})" class="list-group-item">
         <div class="row">
-          <div class="col-xs-12 col-sm-2">
-            <h4 class="list-group-item-heading" ng-bind="product.Title"></h4>
+          <div class="col-xs-12 col-sm-2">            
             <img ng-src="{{product.Image}}" class="img-responsive" width="90px">
           </div>
           <div class="col-xs-12 col-sm-10">  
-            <h4 class="list-group-item-heading">Summary</h4>       
-            <p class="list-group-item-text small" ng-bind="product.Description"></p>
-            <br>
-            <div class="row">
-              <div class="col-xs-12 col-sm-3">
-                <p class="list-group-item-text small">Price: <span ng-bind="product.Price | currency"></span></p>           
-                <p class="list-group-item-text small">Stock: <span ng-bind="product.Stock"></span></p>
-                <p class="list-group-item-text small">Status: <span ng-bind="product.Status"></span></p>
-              </div>
-              <div class="col-xs-12 col-sm-6">              
-                <p class="list-group-item-text">Category: <span ng-bind="product.Category"></span></p>
-                <p class="list-group-item-text">Author: <span ng-bind="product.Author"></span></p>
-              </div>
-            </div>          
+            <p>
+              <span class="text-medium text-capitalize" ng-bind="product.Title"></span>
+              <span ng-if="product.Status === 'instock'">
+                <span class="label label-primary">In Stock</span>
+              </span>
+              <span ng-if="product.Status === 'outofstock'">
+                <span class="label label-danger">Out of Stock</span>
+              </span>
+            </p>
+            <p class="list-group-item-text">
+              <strong>by</strong> <span class="text-capitalize" ng-bind="product.Author"></span> | <strong>Category</strong> <span ng-bind="product.Category"></span>
+            </p>
+            <p class="list-group-item-text small">
+              <strong>Price</strong> <span ng-bind="product.Price | currency"></span>
+            </p>
+            <p class="list-group-item-text small" ng-show="product.Stock > 0">
+              <strong>Stock</strong> <span ng-bind="product.Stock"></span> <span>pcs</span>
+            </p>
+            <!--<h4 class="list-group-item-heading">Book Description</h4>       
+            <p class="list-group-item-text small">
+              <span ng-show="product.Description.length > 250 && (!isReadMore || isShortDesc)">
+                <span ng-bind="product.Description.substr(0,250)"></span>...
+              </span>
+              <span ng-show="product.Description.length < 250 || isReadMore">
+                <span ng-bind="product.Description"></span>
+              </span>
+              <br>
+                <span ng-hide="true">{{ isShortDesc = product.Description.length > 250 ? false : true }}</span>
+              <span ng-hide="isReadMore || isShortDesc" class="label label-primary" ng-click="readMore(true, $event)">read more</span>
+              <span ng-show="isReadMore && !isShortDesc" class="label label-danger" ng-click="readMore(false, $event)">read less</span>
+            </p>-->
           </div>
         </div>      
-      </a>
+      </div>
     </div>
     <div class="text-center">
       <uib-pagination ng-show="pagedItems.length !== 0" total-items="filterLength" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>

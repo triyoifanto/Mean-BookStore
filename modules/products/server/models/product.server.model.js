@@ -19,6 +19,13 @@ var validateLocalStrategyProperty = function (property) {
  * Product Schema
  */
 var ProductSchema = new Schema({
+  ISBN: {
+    type: String,
+    unique: 'ISBN already exists',
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyProperty, 'Please fill in book code']
+  },
   Title:{
     type: String,
     trim: true,
@@ -46,6 +53,11 @@ var ProductSchema = new Schema({
     trim: true,
     default: 'modules/products/client/img/no-cover.jpg'
   },
+  SecondaryImage:{
+    type: String,
+    trim: true,
+    default: 'modules/products/client/img/no-cover.jpg'
+  },
   Price:{
     type: Number,
     default: 0,
@@ -56,7 +68,7 @@ var ProductSchema = new Schema({
     type: Number,
     default: 0,
     Min: 0,
-    Max: 999999999
+    Max: 100
   },
   Status:{
     type: String,

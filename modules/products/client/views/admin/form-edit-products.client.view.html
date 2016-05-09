@@ -11,6 +11,20 @@
                 <div class="row">
                   <div class="col-xs-8">
                     <div class="form-group" show-errors>
+                      <label for="isbn">ISBN</label>
+                      <input type="text" id="isbn" name="isbn" class="form-control" ng-model="product.ISBN" placeholder="ISBN" required ng-pattern="/^ISBN(?:-13)?:?\x20*(?=.{17}$)97(?:8|9)([ -])\d{1,5}\1\d{1,7}\1\d{1,6}\1\d$/">
+                      <div ng-messages="productForm.isbn.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">ISBN is required.</p>
+                        <p class="help-block error-text" ng-message="pattern">Please input ISBN-13 type code. For example:
+                          <br>ISBN-13: 978-1-4028-9462-6
+                          <br>ISBN: 978-1-4028-9462-6
+                          <br>ISBN-13 978-1-4028-9462-6
+                          <br>ISBN 978-1-4028-9462-6
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="form-group" show-errors>
                       <label for="title">Book Title</label>
                       <input type="text" id="title" name="title" class="form-control" ng-model="product.Title" placeholder="Book Title" required>
                       <div ng-messages="productForm.title.$error" role="alert">
@@ -45,53 +59,84 @@
 
                     <div class="form-group" show-errors>
                       <label for="price">Price</label>
-                      <input type="text" id="price" name="price" class="form-control" ng-model="product.Price" placeholder="Price"required ng-pattern="/^\d*\.?\d*$/">
+                      <input type="text" id="price" name="price" class="form-control" ng-model="product.Price" placeholder="Price"required ng-pattern="/^\d+(\.\d{1,2})?$/">
                       <div ng-messages="productForm.price.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Price is required.</p>
-                        <p class="help-block error-text" ng-message="pattern">Invalid number.</p>
+                        <p class="help-block error-text" ng-message="pattern">Please input price with max two decimal number after comma.</p>
                       </div>
                     </div>
 
                     <div class="form-group" show-errors>
                       <label for="stock">Stock</label>
-                      <input type="text" id="stock" name="stock" class="form-control" ng-model="product.Stock" placeholder="Stock" lowercase required ng-pattern="/^\d+$/">
+                      <input type="text" id="stock" name="stock" class="form-control" ng-model="product.Stock" placeholder="Stock" lowercase required ng-pattern="/^0?[0-9]?[0-9]$|^(100)$/">
                       <div ng-messages="productForm.stock.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Stock is required.</p>
-                        <p class="help-block error-text" ng-message="pattern">Invalid number.</p>
+                        <p class="help-block error-text" ng-message="pattern">Invalid number. Stock cannot more than 100.</p>
                       </div>
                     </div>
 
-                    <div class="form-group" show-errors>
+                    <!--<div class="form-group" show-errors>
                       <label for="status">Status</label>
                       <select name="status" class="form-control" ng-model="product.Status" required><option value="instock">In Stock</option><option value="outofstock">Out of Stock</option></select>
                       <div ng-messages="productForm.status.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Status is required.</p>
                       </div>
-                    </div>
+                    </div>-->
                   </div>
 
                   <div class="col-xs-4">
-                    <div class="form-group" show-errors>
-                      <div class="form-group text-center">
-                        <img ng-src="{{imageURL}}" alt="book cover" class="img-thumbnail">
-                      </div>
-                      <div class="text-center form-group" ng-hide="uploader.queue.length">
-                        <span class="btn btn-default btn-file">
-                            Select Image <input type="file" nv-file-select uploader="uploader">
-                        </span>
-                      </div>
-                      <div class="text-center form-group" ng-show="uploader.queue.length">
-                        <button class="btn btn-primary" ng-click="uploadBookCover();">Upload</button>
-                        <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
-                      </div>
-                      <div ng-show="success" class="text-center text-success">
-                        <strong>Book Cover Uploaded Successfully</strong>
-                      </div>
-                      <div ng-show="error" class="text-center text-danger">
-                        <strong ng-bind="error"></strong>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">                          
+                          <div class="form-group text-center">
+                            <span><strong>Primary Image</strong></span>
+                            <img ng-src="{{imageURL}}" alt="book cover" class="img-thumbnail">
+                          </div>
+                          <div class="text-center form-group" ng-hide="uploader.queue.length">
+                            <span class="btn btn-default btn-file">
+                                Select Image <input type="file" nv-file-select uploader="uploader">
+                            </span>
+                          </div>
+                          <div class="text-center form-group" ng-show="uploader.queue.length">
+                            <button class="btn btn-primary" ng-click="uploadBookCover();">Upload</button>
+                            <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+                          </div>
+                          <div ng-show="success" class="text-center text-success">
+                            <strong>Book Cover Uploaded Successfully</strong>
+                          </div>
+                          <div ng-show="errorImage" class="text-center text-danger">
+                            <strong ng-bind="error"></strong>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">
+                          <div class="form-group text-center">
+                            <span><strong>Secondary Image</strong></span>
+                            <img ng-src="{{imageURL2}}" alt="book cover" class="img-thumbnail">
+                          </div>
+                          <div class="text-center form-group" ng-hide="uploader2.queue.length">
+                            <span class="btn btn-default btn-file">
+                                Select Image <input type="file" nv-file-select uploader="uploader2">
+                            </span>
+                          </div>
+                          <div class="text-center form-group" ng-show="uploader2.queue.length">
+                            <button class="btn btn-primary" ng-click="uploadBookCover2();">Upload</button>
+                            <button class="btn btn-default" ng-click="cancelUpload2();">Cancel</button>
+                          </div>
+                          <div ng-show="success2" class="text-center text-success">
+                            <strong>Secondary Book Cover Uploaded Successfully</strong>
+                          </div>
+                          <div ng-show="errorImage2" class="text-center text-danger">
+                            <strong ng-bind="error2"></strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                    
                 </div>
                 
                 <div class="row">
