@@ -46,18 +46,11 @@ var UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    unique: 'Email already registered',
     lowercase: true,
     trim: true,
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
-  },
-  username: {
-    type: String,
-    unique: 'Username already exists',
-    required: 'Please fill in a username',
-    lowercase: true,
-    trim: true
   },
   password: {
     type: String,
@@ -166,7 +159,7 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
   var possibleUsername = username.toLowerCase() + (suffix || '');
 
   _this.findOne({
-    username: possibleUsername
+    email: possibleUsername
   }, function (err, user) {
     if (!err) {
       if (!user) {

@@ -106,7 +106,7 @@
 
       expect(scope.form.password.$valid).toBeFalsy();
       expect(scope.form.password.$error.required).toBeFalsy();
-      expect(scope.passwordErrors).toEqual(['The password must be fewer than 128 characters.']);
+      expect(scope.passwordErrors).toEqual(['The password must be fewer than 32 characters.']);
       expect(scope.requirementsColor).toEqual('primary');
       expect(scope.requirementsProgress).toEqual('80');
     });

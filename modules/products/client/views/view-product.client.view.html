@@ -40,7 +40,7 @@
                 <select ng-show="product.Stock > 0" ng-disabled="product.Stock == 0">
                   <option ng-repeat="i in getMaxQty(product.Stock) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
-                <button class="btn btn-primary btn-sm" ng-class="{'disabled' : product.Stock == 0}">
+                <button ng-click="addToCart(product._id)" class="btn btn-primary btn-sm" ng-class="{'disabled' : product.Stock == 0}">
                   <i class="fa fa-cart-plus"></i>
                   Add to Cart
                 </button>

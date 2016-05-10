@@ -155,13 +155,14 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
         return done(err);
       } else {
         if (!user) {
-          var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          //var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+          var possibleUsername = providerUserProfile.email;
 
           User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
             user = new User({
               firstName: providerUserProfile.firstName,
               lastName: providerUserProfile.lastName,
-              username: availableUsername,
+              //username: availableUsername,
               displayName: providerUserProfile.displayName,
               email: providerUserProfile.email,
               profileImageURL: providerUserProfile.profileImageURL,

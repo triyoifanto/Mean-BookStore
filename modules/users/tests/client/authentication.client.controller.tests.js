@@ -131,19 +131,6 @@
           expect(scope.error).toEqual(null);
           expect($location.url()).toBe('/');
         });
-
-        it('should fail to register with duplicate Username', function () {
-          // Test expected POST request
-          $httpBackend.when('POST', '/api/auth/signup').respond(400, {
-            'message': 'Username already exists'
-          });
-
-          scope.signup(true);
-          $httpBackend.flush();
-
-          // Test scope value
-          expect(scope.error).toBe('Username already exists');
-        });
       });
     });
 
@@ -156,7 +143,7 @@
 
         // Mock logged in user
         _Authentication_.user = {
-          username: 'test',
+          email: 'test@test.com',
           roles: ['user']
         };
 

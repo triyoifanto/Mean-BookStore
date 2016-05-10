@@ -34,5 +34,10 @@ angular
     $scope.chooseImage = function(selectedImage){
       $scope.selectedImage = selectedImage;
     };
+
+    // TODO: add to cart function
+    $scope.addToCart = function(productId){
+      // TODO: add product to cart table
+    };
   }
 ]);
