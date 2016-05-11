@@ -1,21 +1,26 @@
 <div ng-controller="EditProfileController">
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
-        <div class="form-group" show-errors>
+        <div class="form-group" ng-class="userForm.firstName.$invalid && userForm.firstName.$dirty ? 'has-error' : ''" show-errors>
           <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" ng-maxlength="20" required>
           <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+            <p class="help-block error-text" ng-class="userForm.firstName.$pristine || !userForm.firstName.$error.required ? 'ng-hide' : ''" ng-message="required">First name is required.</p>
+            <p class="help-block error-text" ng-class="userForm.firstName.$pristine || !userForm.firstName.$error.maxlength ? 'ng-hide' : ''" ng-message="maxlength">First name maxlength is 20.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
+
+        <div class="form-group" ng-class="userForm.lastName.$invalid && userForm.lastName.$dirty ? 'has-error' : ''" show-errors>
           <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
+          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="credentials.lastName" placeholder="Last Name" ng-maxlength="20" required>
+
           <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+            <p class="help-block error-text" ng-class="userForm.lastName.$pristine || !userForm.lastName.$error.required ? 'ng-hide' : ''" ng-message="required">Last name is required.</p>
+            <p class="help-block error-text" ng-class="userForm.lastName.$pristine || !userForm.lastName.$error.maxlength ? 'ng-hide' : ''" ng-message="maxlength">Last name maxlength is 20.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
+
+        <!--<div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
           <div ng-messages="userForm.email.$error" role="alert">
@@ -29,22 +34,25 @@
           <div ng-messages="userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Username is required.</p>
           </div>
-        </div>
+        </div>-->
+
         <div ng-if="renderControll(user);">
-        <div class="form-group" show-errors >
-          <label for="shippingAddr">Shipping Address</label>
-          <input type="text" id="shippingAddr" name="shippingAddr" class="form-control" ng-model="user.shippingAddr" placeholder="Shipping Address" lowercase required>
-          <div ng-messages="userForm.shippingAddr.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Shipping is required.</p>
+          <div class="form-group" ng-class="userForm.shippingAddr.$invalid && userForm.shippingAddr.$dirty ? 'has-error' : ''" show-errors >
+            <label for="shippingAddr">Shipping Address</label>
+            <input type="text" id="shippingAddr" name="shippingAddr" class="form-control" ng-model="user.shippingAddr" placeholder="Shipping Address" ng-maxlength="240" lowercase required>
+            <div ng-messages="userForm.shippingAddr.$error" role="alert">
+              <p class="help-block error-text" ng-class="userForm.shippingAddr.$pristine || !userForm.shippingAddr.$error.required ? 'ng-hide' : ''" ng-message="required">Shipping Address is required.</p>
+              <p class="help-block error-text" ng-class="userForm.shippingAddr.$pristine || !userForm.shippingAddr.$error.maxlength ? 'ng-hide' : ''" ng-message="maxlength">Shipping Address maxlength is 240.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="billingAddr">Billing Address</label>
-          <input type="text" id="billingAddr" name="billingAddr" class="form-control" ng-model="user.billingAddr" placeholder="Billing Address" lowercase required>
-          <div ng-messages="userForm.billingAddr.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Billing is required.</p>
+          <div class="form-group" ng-class="userForm.billingAddr.$invalid && userForm.billingAddr.$dirty ? 'has-error' : ''" show-errors>
+            <label for="billingAddr">Billing Address</label>
+            <input type="text" id="billingAddr" name="billingAddr" class="form-control" ng-model="user.billingAddr" placeholder="Billing Address" ng-maxlength="240" lowercase required>
+            <div ng-messages="userForm.billingAddr.$error" role="alert">
+              <p class="help-block error-text" ng-class="userForm.billingAddr.$pristine || !userForm.billingAddr.$error.required ? 'ng-hide' : ''" ng-message="required">Billing Address is required.</p>
+              <p class="help-block error-text" ng-class="userForm.billingAddr.$pristine || !userForm.billingAddr.$error.maxlength ? 'ng-hide' : ''" ng-message="maxlength">Billing Address maxlength is 240.</p>
+            </div>
           </div>
-        </div>
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
